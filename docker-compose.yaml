@@ -1,0 +1,36 @@
+version: '3.7'
+
+
+services:
+
+  task-php:
+    container_name: task_php
+    build:
+      context: Docker/php
+      dockerfile: Dockerfile
+    volumes:
+      - "./app/:app/"
+
+  task-nginx:
+    container_name: task_nginx
+    build:
+      context: Docker/nginx
+      dockerfile: Dockerfile
+    volumes:
+      - "./app:/app"
+    ports:
+      - "8085:80"
+
+  task-rabit:
+    container_name: task_rabbit
+    image: rabbitmq:3.11.1-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    hostname: rabbit
+    environment:
+      RABBITMQ_DEFAULT_USER: rabbitmq
+      RABBITMQ_DEFAULT_PASS: 1234
+      RABBITMQ_DEFAULT_VHOST: task_rabbit
+
+
