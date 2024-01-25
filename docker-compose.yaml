@@ -9,7 +9,7 @@ services:
       context: Docker/php
       dockerfile: Dockerfile
     volumes:
-      - "./app/:app/"
+      - "./app:/app"
 
   task-nginx:
     container_name: task_nginx
@@ -21,16 +21,18 @@ services:
     ports:
       - "8085:80"
 
-  task-rabit:
+  task-rabbit:
     container_name: task_rabbit
     image: rabbitmq:3.11.1-management
     ports:
       - "5672:5672"
       - "15672:15672"
+    volumes:
+      - "./data/rabbit:/var/lib/rabbitmq"
     hostname: rabbit
     environment:
       RABBITMQ_DEFAULT_USER: rabbitmq
       RABBITMQ_DEFAULT_PASS: 1234
-      RABBITMQ_DEFAULT_VHOST: task_rabbit
+      RABBITMQ_DEFAULT_VHOST: task-rabbit
 
 
