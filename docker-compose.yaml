@@ -18,6 +18,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - "./app:/app"
+      - "./Docker/nginx/conf.d:/etc/nginx/conf.d"
     ports:
       - "8085:80"
 

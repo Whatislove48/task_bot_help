@@ -1,6 +1,9 @@
 <?php
 
+require_once "vendor/autoload.php";
 
+require_once "private/index.php" ;
 
-echo 123;
+echo "END";
 
+?>
